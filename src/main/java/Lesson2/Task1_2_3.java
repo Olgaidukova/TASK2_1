@@ -1,14 +1,16 @@
+package Lesson2;
 import java.util.Scanner;
 
 /**
  * @author Gaidukova Olga
  */
-public class C_A { // новый класс для выбора калькулятора или массива
+public class Task1_2_3 {// новый класс для выбора калькулятора или массива
+
     public static void main(String[] args) {
         System.out.println("Введите 1 - чтобы вызвать калькулятор или 2 - чтобы вызвать поиск максимального слова в массиве");
         Scanner scanner = new Scanner(System.in);
         int answer = scanner.nextInt();
-        switch (answer){
+        switch (answer) {
             case 1:
                 Calc calc = new Calc();
                 calc.calc();
@@ -23,7 +25,7 @@ public class C_A { // новый класс для выбора калькуля
     /**
      * Задание 2.1: базовые операции для калькулятора
      */
-    public static class Calc { //обьявление нового класса для калькулятора
+    static class Calc { //обьявление нового класса для калькулятора
 
         public void calc() { //обьявление нового метода для калькулятора
             Scanner in = new Scanner(System.in);
@@ -66,23 +68,24 @@ public class C_A { // новый класс для выбора калькуля
         private int arr_length;
         private Scanner scanner = new Scanner(System.in);
 
-        public Array(){
+        public Array() {
             System.out.println("Введите длину массива: ");
             setArr_length(scanner.nextInt());
             System.out.println("Введите элементы массива по порядку: ");
             String words[] = new String[arr_length];
-            for (int i = 0; i < arr_length; i++){
+            for (int i = 0; i < arr_length; i++) {
                 words[i] = scanner.next();
             }
             setArray(words);
         }
 
-        public void setArray(String arr[]){
+        public void setArray(String arr[]) {
             this.array = new String[arr.length];
-            for (int i = 0; i < arr.length; i++){
+            for (int i = 0; i < arr.length; i++) {
                 this.array[i] = arr[i];
             }
         }
+
         public String[] getArray() {
             return array;
         }
@@ -95,10 +98,10 @@ public class C_A { // новый класс для выбора калькуля
             this.arr_length = arr_length;
         }
 
-        public String maxLengthWord(){
+        public String maxLengthWord() {
             String maxWord = this.array[0];
             int max = this.array[0].length();
-            for (int i=0; i < getArr_length(); i++){
+            for (int i = 0; i < getArr_length(); i++) {
                 if (this.array[i].length() > max) {
                     maxWord = this.array[i];
                     max = this.array[i].length();
@@ -108,3 +111,4 @@ public class C_A { // новый класс для выбора калькуля
         }
     }
 }
+
