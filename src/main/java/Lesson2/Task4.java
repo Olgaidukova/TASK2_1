@@ -1,5 +1,4 @@
 package Lesson2;
-import java.util.Random;
 
 /**
  * @author Gaidukova Olga
@@ -7,101 +6,55 @@ import java.util.Random;
  * отрицательный и минимальный положительный элементы массива. Поменять их местами.
  */
 public class Task4 {
-    public static final int array_length = 20;
     public static void main(String[] args) {
-        int indexMaxNegative, indexMinPositive;
-        boolean negative = true, positive = true;
-        int randNumbers[] = new int[array_length];
-        for (int i = 0; i < array_length; i++){
-            Random random = new Random();
-            randNumbers[i] = -10 + random.nextInt(11+10);
-            System.out.println(i + ") " + randNumbers[i]);
-        }
-        indexMaxNegative = findMaxNegativeIndex(randNumbers);
-        System.out.println("Максимальное отрицательное число " + randNumbers[indexMaxNegative]);
-        if (indexMaxNegative == 20) {
-            System.out.println("Нет отрицательных чисел");
-            negative = false;
-        }
-        indexMinPositive = findMinPositive(randNumbers);
-        System.out.println("Минимальное положительное число " + randNumbers[indexMinPositive]);
-        if (indexMinPositive == 20) {
-            System.out.println("Нет положительных чисел");
-            positive = false;
+
+        System.out.println("Массив от -10 до 10");
+
+        int[] massive = new int[20];
+
+        for (int i = 0; i < massive.length; i++){
+            massive[i] = random(-10, 10);
+            System.out.print(massive[i] + " ");
         }
 
-        if (positive && negative) {
-            substitute(randNumbers,indexMaxNegative,indexMinPositive);
-            for (int i = 0; i < array_length; i++) {
-                System.out.println(i + ") " + randNumbers[i]);
+
+        int iMax = 0;
+        int max = -11;
+        for (int i = 0; i < massive.length; i++) {
+            if (massive[i] > max && massive[i] < 0) {
+                max = massive[i];
+                iMax = i;
             }
         }
-        else System.out.println("\n" + "Нет положительного или отрицательного числа, ничего не менять");
+
+        int iMin = 0;
+        int min = 11;
+        for (int j = 0; j < massive.length; j++) {
+            if (massive[j] < min && massive[j] > 0) {
+                min = massive[j];
+                iMin = j;
+            }
+        }
+
+        massive[iMin] = max;
+        massive[iMax] = min;
+
+        System.out.println();
+        System.out.println("Максимальный отрицательный элемент массива = " + max);
+
+        System.out.println("Минимальный положительный элемент массива = " + min);
+
+        System.out.println("Массив после смены мест");
+
+        for (int i = 0; i < massive.length; i++){
+            System.out.print(massive[i] + " ");
+        }
+
     }
 
-
-    /**
-     * @param array найти максимальный отрицательный элемент
-     * @return максимальное отрицательное число в массиве
-     */
-    public static int findMaxNegativeIndex(int array[]){
-        int maxNegative = -20;
-        int indexMaxNegative = 20;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] < 0) {
-                maxNegative = array[i];
-                indexMaxNegative = i;
-                break;
-            }
-        }
-        if (maxNegative != -20) {
-            for (int i = 0; i < array.length; i++) {
-                if ((array[i] > maxNegative) && (array[i] < 0)) {
-                    maxNegative = array[i];
-                    indexMaxNegative = i;
-                }
-            }
-        }
-        return indexMaxNegative;
+    public static int random(int min, int max) {
+        max -= min;
+        return (int) (Math.random() * ++max) + min;
     }
 
-    /**
-     * @param array найти минимальный положительный элемент
-     * @return минимальное положительное число в массиве
-     */
-    public static int findMinPositive(int array[]){
-        int minPositive = 20;
-        int indexMinPositive = 20;
-        for (int i = 0; i < array.length; i++){
-            if (array[i] > 0) {
-                minPositive = array[i];
-                indexMinPositive = i;
-                break;
-            }
-        }
-
-        if (minPositive != 20) {
-            for (int i = 0; i < array.length; i++) {
-                if ((array[i] > 0) && (array[i] < minPositive)) {
-                    minPositive = array[i];
-                    indexMinPositive = i;
-                }
-            }
-        }
-        return indexMinPositive;
-    }
-
-
-    /**
-     * @param array где будет изменено максимальное отрицательное и минимальное положительное число
-     * @param indexMaxNeg - индекс максимального отрицательного числа
-     * @param indexMinPos - индекс минимального положительного числа
-     * @return обновить массив
-     */
-    public static int [] substitute (int array[], int indexMaxNeg, int indexMinPos) {
-        int tmp = array[indexMaxNeg];
-        array[indexMaxNeg] = array[indexMinPos];
-        array[indexMinPos] = tmp;
-        return array;
-    }
 }
