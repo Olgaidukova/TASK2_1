@@ -2,6 +2,11 @@ package Lesson3;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * @author Gaidukova Olga
+ * Задание 3. Реализовать калькулятор в стиле ООП. Архитектуру приложения продумать самостоятельно.
+ */
+
 public class Task1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
