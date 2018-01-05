@@ -8,7 +8,6 @@ import java.util.Scanner;
  * Задание 2.5. Формируется новогодний подарок. Он может включать в себя разные сладости (Candy, Jellybean, etc.)
  * У каждой сладости есть название, вес, цена и свой уникальный параметр. Необходимо собрать подарок из сладостей.
  * Найти общий вес подарка, общую стоимость подарка и вывести на консоль информацию о всех сладостях в подарке.
- * !!!!На редактировании!!!!
  */
 
 
@@ -16,9 +15,9 @@ import java.util.Scanner;
 public class Task5 {
     public static void main(String args[]) {
         ArrayList<Sweet> list = new ArrayList<Sweet>();
-        list.add(new Chupachups("Chupachups", 56,1000, "klubnika"));
-        list.add(new Mars("Mars", 67, 200, 3500));
-        list.add(new Snikers ("Snikers", 300, 450,"5 nuts"));
+        list.add(new Chupachups("Chupachups", 56,1000, "klubnika", "small"));
+        list.add(new Mars("Mars", 67, 200, 3500, "small"));
+        list.add(new Snikers ("Snikers", 300, 450,"5 nuts", "small"));
 
         ArrayList<Sweet> choice = new ArrayList<Sweet>();
 
@@ -31,7 +30,15 @@ public class Task5 {
                 System.out.println("в корзине находится " + choice.get(i).getName());
             }
         }
-
+        Sweet [] present = {chupachups, mars, snikers};
+        for (Sweet someSladost : present){
+            System.out.println(someSladost.toString());
+        }
+        int comWeight=chupachups.getWeight()+snikers.getWeight()+mars.getWeight();
+        System.out.println("Общий вес подарка равен " +comWeight);
+        int comPrice=chupachups.getPrice()+snikers.getPrice()+mars.getPrice();
+        System.out.println("Общая цена подарка равна "+ comPrice);
+    }
     }
 
 }
@@ -40,11 +47,13 @@ abstract class Sweet {
     private String name;
     private Integer weight;
     private Integer price;
+    private String size;
 
-    public Sweet(String name, Integer weight, Integer price) {
+    public Sweet(String name, Integer weight, Integer price, String size) {
         this.name = name;
         this.weight = weight;
         this.price = price;
+        this.size = size;
     }
 
     public String getName() {
@@ -71,15 +80,23 @@ abstract class Sweet {
         this.price = price;
     }
 
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
     @Override
     public String toString() {
-        return "name= " + name  + ", weight=" + weight + ", price=" + price;
+        return "name= " + name  + ", weight=" + weight + ", price=" + price + ", size=" + size ;
     }
 }
 class Chupachups extends Sweet {
     private String vkus;
-    public Chupachups(String name, Integer weight, Integer price, String vkus) {
-        super(name, weight, price);
+    public Chupachups(String name, Integer weight, Integer price, String vkus, String size) {
+        super(name, weight, price, size);
         this.vkus=vkus;
     }
 
@@ -98,8 +115,8 @@ class Chupachups extends Sweet {
 }
 class Mars extends Sweet {
     private Integer kkal;
-    public Mars(String name, Integer weight, Integer price, Integer kkal) {
-        super(name, weight, price);
+    public Mars(String name, Integer weight, Integer price, Integer kkal, String size) {
+        super(name, weight, price, size);
         this.kkal=kkal;
     }
 
@@ -119,8 +136,8 @@ class Mars extends Sweet {
 }
 class Snikers extends Sweet {
     private String nuts;
-    public Snikers(String name, Integer weight, Integer price, String nuts) {
-        super(name, weight, price);
+    public Snikers(String name, Integer weight, Integer price, String nuts, String size) {
+        super(name, weight, price,size);
         this.nuts=nuts;
     }
 
